@@ -1,17 +1,18 @@
+import axios from "axios";
+
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
+// Login
 export const login = async (user: any) => {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/signin`, {
-      method: "POST",
+    const response = await axios.post(`${baseURL}/signin`, user, {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(user),
-    })
-      .then((res) => res.json())
-      .then((data) => data);
-
-    return response;
+    });
+    return response.data;
   } catch (error) {
-    return error;
+    console.error("Error during login:", error);
+    return null;
   }
 };

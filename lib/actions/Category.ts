@@ -1,96 +1,70 @@
+import axios from "axios";
+
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
+// Get all categories
 export const getAllCategories = async () => {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/categories`,
-      { cache: "no-store" }
-    )
-      .then((res) => res.json())
-      .then((data) => data);
-
-    return response.categories;
+    const response = await axios.get(`${baseURL}/categories`);
+    return response.data.categories;
   } catch (error) {
-    return error;
+    console.error("Error fetching categories:", error);
+    return [];
   }
 };
 
+// Get category by ID
 export const getCategoryById = async (id: string) => {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/categories/${id}`,
-      { cache: "no-cache" }
-    )
-      .then((res) => res.json())
-      .then((data) => data);
-
-    return response.category;
+    const response = await axios.get(`${baseURL}/categories/${id}`);
+    return response.data.category;
   } catch (error) {
-    return error;
+    console.error("Error fetching category:", error);
+    return null;
   }
 };
 
+// Add new category
 export const addCategory = async (category: any) => {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/categories`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(category),
-        cache: "no-cache",
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => data);
-
-    return response;
+    const response = await axios.post(`${baseURL}/categories`, category, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return response.data;
   } catch (error) {
-    return error;
+    console.error("Error adding category:", error);
+    return null;
   }
 };
 
+// Update category by ID
 export const updateCategoryById = async (id: string, category: any) => {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/categories/${id}`,
-      {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(category),
-        cache: "no-cache",
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => data);
-
-    return response;
+    const response = await axios.put(`${baseURL}/categories/${id}`, category, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return response.data;
   } catch (error) {
-    return error;
+    console.error("Error updating category:", error);
+    return null;
   }
 };
 
+// Delete category by ID
 export const deleteCategoryById = async (id: string) => {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/categories/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        cache: "no-cache",
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => data);
-
-    return response;
+    const response = await axios.delete(`${baseURL}/categories/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return response.data;
   } catch (error) {
-    return error;
+    console.error("Error deleting category:", error);
+    return null;
   }
 };
