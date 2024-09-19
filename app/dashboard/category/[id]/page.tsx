@@ -7,7 +7,6 @@ const page = async ({ params }: { params: { id: string } }) => {
 
   return (
     <div>
-      {<h1>Category ID: {params.id}</h1>}
       <CategoryUpdateForm category={category} />
     </div>
   );

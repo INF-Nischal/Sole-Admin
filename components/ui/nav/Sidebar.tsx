@@ -13,8 +13,13 @@ const Sidebar = () => {
       <h1 className="text-2xl font-bold uppercase">Sole API</h1>
       <div className="flex flex-col gap-4 mt-8">
         {sidebarlinks.map((link) => {
-          const isActive =
-            pathname === link.href || pathname.startsWith(link.href);
+          let isActive;
+
+          if (link.href === "/dashboard") {
+            isActive = pathname === "/dashboard";
+          } else {
+            isActive = pathname.startsWith(link.href);
+          }
 
           return (
             <Link

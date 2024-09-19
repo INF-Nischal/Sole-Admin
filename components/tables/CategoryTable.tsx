@@ -31,7 +31,7 @@ const CategoryTable = ({ categories }: CategoryTableProps) => {
 
     if (response.success) {
       toast({
-        title: "Category Added",
+        title: "Category Deleted",
         description: response.message,
         duration: 3000,
       });

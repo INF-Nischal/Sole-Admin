@@ -46,15 +46,14 @@ const CategoryUpdateForm = ({ category }: CategoryUpdateFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      categoryName: category.categoryName,
-      categoryStatus: category.categoryStatus,
-      categoryImageURL: category.categoryImageURL._id,
-      categoryDescription: category.categoryDescription,
+      categoryName: category.categoryName || "",
+      categoryStatus: category.categoryStatus || "",
+      categoryImageURL: category.categoryImageURL?._id || "",
+      categoryDescription: category.categoryDescription || "",
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("clicked");
     if (selectedImage) {
       values.categoryImageURL = selectedImage._id;
     }
@@ -62,8 +61,6 @@ const CategoryUpdateForm = ({ category }: CategoryUpdateFormProps) => {
     const response = await updateCategoryById(category._id, values);
 
     if (response.success) {
-      console.log(response);
-
       toast({
         title: "Category Updated Successfully!",
         description: response.message,
@@ -103,11 +100,11 @@ const CategoryUpdateForm = ({ category }: CategoryUpdateFormProps) => {
             label="Category Status"
             options={statusOptions}
           />
-          <div className="hover:cursor-pointer">
+          <div className="flex flex-col gap-4 hover:cursor-pointer">
             <Button
               type="button"
               onClick={() => setShowDialog(true)}
-              className="hover:cursor-pointer"
+              className="w-[160px] hover:cursor-pointer"
             >
               {selectedImage ? "Change Image" : "Select Image"}
             </Button>

@@ -65,8 +65,10 @@ const OrderById = ({ order }: OrderProps) => {
         {order.products.map((product) => (
           <div key={product.productId._id}>
             <ProductCard
+              imageUrl={product.productId.productImageUrlList.url}
               name={product.productId.productName}
-              price={product.productId.productPrice}
+              price={product.price}
+              quantity={product.orderedQty}
             />
           </div>
         ))}

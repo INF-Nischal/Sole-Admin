@@ -11,6 +11,7 @@ export interface Order {
   products: {
     productId: Product;
     price: number;
+    orderedQty: number;
   }[];
   totalPrice: number;
 }

@@ -37,11 +37,13 @@ const formSchema = z.object({
 });
 
 const ProductUpdateForm = ({ product }: ProductUpdateFormProps) => {
+  console.log(typeof product.productPrice);
+
   const router = useRouter();
   const { toast } = useToast();
   const [categories, setCategories] = useState<Category[]>([]);
   const [showDialog, setShowDialog] = useState<boolean>(false);
-  const [selectedImage, setSelectedImage] = useState<TImage>(
+  const [selectedImage, setSelectedImage] = useState<TImage | null>(
     product.productImageUrlList
   );
 
@@ -66,8 +68,8 @@ const ProductUpdateForm = ({ product }: ProductUpdateFormProps) => {
       productName: product.productName || "",
       productDescription: product.productDescription || "",
       productPrice: product.productPrice || 0,
-      productCategory: product.productCategory._id || "",
-      productImageUrlList: product.productImageUrlList._id || "",
+      productCategory: product.productCategory?._id || "",
+      productImageUrlList: product.productImageUrlList?._id || "",
       productOffer: product.productOffer || "",
       productStatus: product.productStatus || "",
     },
@@ -77,6 +79,7 @@ const ProductUpdateForm = ({ product }: ProductUpdateFormProps) => {
     if (selectedImage) {
       values.productImageUrlList = selectedImage._id;
     }
+
     const response = await updateProductById(product._id, values);
 
     if (response) {
@@ -131,11 +134,11 @@ const ProductUpdateForm = ({ product }: ProductUpdateFormProps) => {
             label="Product Status"
             options={statusOptions}
           />
-          <div className="hover:cursor-pointer">
+          <div className="hover:cursor-pointer flex flex-col gap-4">
             <Button
               type="button"
               onClick={() => setShowDialog(true)}
-              className="hover:cursor-pointer"
+              className="hover:cursor-pointer w-[160px]"
             >
               {selectedImage ? "Change Image" : "Select Image"}
             </Button>

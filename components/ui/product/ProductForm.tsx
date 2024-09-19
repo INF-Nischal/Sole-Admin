@@ -24,7 +24,7 @@ import { useToast } from "../use-toast";
 const formSchema = z.object({
   productName: z.string(),
   productDescription: z.string(),
-  productPrice: z.string(),
+  productPrice: z.number(),
   productCategory: z.string(),
   productImageUrlList: z.string(),
   productOffer: z.string(),
@@ -58,7 +58,7 @@ const ProductForm = () => {
     defaultValues: {
       productName: "",
       productDescription: "",
-      productPrice: "",
+      productPrice: 0,
       productCategory: "",
       productImageUrlList: "",
       productOffer: "",
@@ -124,11 +124,11 @@ const ProductForm = () => {
             label="Product Status"
             options={statusOptions}
           />
-          <div className="hover:cursor-pointer">
+          <div className="flex flex-col gap-4 hover:cursor-pointer">
             <Button
               type="button"
               onClick={() => setShowDialog(true)}
-              className="hover:cursor-pointer"
+              className="w-[160px] hover:cursor-pointer"
             >
               {selectedImage ? "Change Image" : "Select Image"}
             </Button>

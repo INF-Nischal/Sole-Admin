@@ -91,11 +91,11 @@ const CategoryForm = () => {
             label="Category Status"
             options={statusOptions}
           />
-          <div className="hover:cursor-pointer">
+          <div className="flex flex-col gap-4 hover:cursor-pointer">
             <Button
               type="button"
               onClick={() => setShowDialog(true)}
-              className="hover:cursor-pointer"
+              className="w-[160px] hover:cursor-pointer"
             >
               {selectedImage ? "Change Image" : "Select Image"}
             </Button>

@@ -32,7 +32,16 @@ const CustomInput = ({
         <FormItem>
           <FormLabel>{label}</FormLabel>
           <FormControl>
-            <Input type={type} placeholder={placeholder} {...field} />
+            <Input
+              type={type}
+              placeholder={placeholder}
+              {...field}
+              onChange={(e) =>
+                field.onChange(
+                  type === "number" ? Number(e.target.value) : e.target.value
+                )
+              }
+            />
           </FormControl>
           <FormMessage />
         </FormItem>
