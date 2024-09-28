@@ -35,6 +35,10 @@ const CategoryForm = () => {
     setShowDialog(false);
   };
 
+  const handleShowDialog = () => {
+    setShowDialog(false);
+  };
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -120,6 +124,7 @@ const CategoryForm = () => {
       </Form>
       <ImageLibrary
         showDialog={showDialog}
+        handleShowDialog={handleShowDialog}
         handleSelectedImage={handleSelectedImage}
       />
     </div>
