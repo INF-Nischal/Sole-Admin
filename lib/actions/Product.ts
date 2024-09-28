@@ -2,6 +2,23 @@ import axios from "axios";
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
+export const getTimeframeProduct = async (query: string) => {
+  try {
+    const response = await axios.get(
+      `${baseURL}/products/analytics?time=${query}`,
+      {
+        headers: {
+          "Cache-Control": "no-store", // Custom cache handling if needed
+        },
+      }
+    );
+
+    return response.data.products;
+  } catch (error) {
+    return [];
+  }
+};
+
 // Get all products
 export const getAllProduct = async () => {
   try {

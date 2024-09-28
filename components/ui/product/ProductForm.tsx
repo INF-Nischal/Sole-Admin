@@ -43,6 +43,10 @@ const ProductForm = () => {
     setShowDialog(false);
   };
 
+  const handleShowDialog = () => {
+    setShowDialog(false);
+  };
+
   useEffect(() => {
     async function fetchCategories() {
       const response = await getAllCategories();
@@ -159,6 +163,7 @@ const ProductForm = () => {
       </Form>
       <ImageLibrary
         showDialog={showDialog}
+        handleShowDialog={handleShowDialog}
         handleSelectedImage={handleSelectedImage}
       />
     </div>

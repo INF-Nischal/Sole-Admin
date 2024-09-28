@@ -2,6 +2,23 @@ import axios from "axios";
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
+export const getTimeframeCategories = async (query: string) => {
+  try {
+    const response = await axios.get(
+      `${baseURL}/categories/analytics?time=${query}`,
+      {
+        headers: {
+          "Cache-Control": "no-store", // Custom cache handling if needed
+        },
+      }
+    );
+
+    return response.data.categories;
+  } catch (error) {
+    return [];
+  }
+};
+
 // Get all categories
 export const getAllCategories = async () => {
   try {

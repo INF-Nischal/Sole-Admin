@@ -7,11 +7,13 @@ import { TImage } from "@/types/Image";
 
 interface ImageLibraryProps {
   showDialog: boolean;
+  handleShowDialog: () => void;
   handleSelectedImage: (img: TImage) => void;
 }
 
 const ImageLibrary = ({
   showDialog,
+  handleShowDialog,
   handleSelectedImage,
 }: ImageLibraryProps) => {
   const [showAssets, setShowAssets] = React.useState(true);
@@ -42,6 +44,7 @@ const ImageLibrary = ({
                 Upload
               </button>
             </div>
+            <button onClick={() => handleShowDialog()}>close</button>
             <div className="mt-4">
               {showAssets && (
                 <Assets handleSelectedImage={handleSelectedImage} />
